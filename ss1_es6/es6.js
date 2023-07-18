@@ -33,7 +33,7 @@ console.log(newList);
 // Yêu cầu 2: Sử dụng cú pháp ES6 để xuất ra màn hình danh sách các bài đăng có rating
 // < 4 với yêu cầu giá trị các phần tử của mảng mới có định dạng: 	<id> - <title> - <rating>
 let newArr = courses.filter(course => course.rating < 4);
-newArr.forEach(course => console.log(course.id + ' - ' + course.title + ' - ' + course.rating));	
+newArr.map(course => console.log(course.id + ' - ' + course.title + ' - ' + course.rating));	
 
 let addedCourses = [ 
     { 
@@ -53,5 +53,9 @@ let addedCourses = [
     } 
   ];
 //   Yêu cầu 3: Sử dụng cú pháp ES6 đã học viết hàm trả về một mảng mới gộp 2 mảng courses và addedCourses
-const mergeArr = [...courses,...addedCourses];
-console.log(mergeArr);
+const mergeArr= (courses,addedCourses) => {
+  return [...courses,...addedCourses];
+};
+
+const mergeArray = mergeArr(courses,addedCourses);
+console.log(mergeArray);

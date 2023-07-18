@@ -1,1 +1,1 @@
-
+mergeArr(courses,addedCourses);
