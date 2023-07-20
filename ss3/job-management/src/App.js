@@ -12,14 +12,14 @@ class App extends React.Component {
     };
   }
   handleChange = (event) => {
-      this.setState ( {
+      this.setState (() => {
         item: event.target.value
       })
   }
   handleAddItem = () => {
-     this.setState ( {
-         item: '',
-         list: [...this.state.list,this.state.item],      
+     this.setState (() => {
+         item: ''
+         list: [...this.state.list,this.state.item]   
      })
   }
 
@@ -35,7 +35,7 @@ class App extends React.Component {
        <table>
        {this.state.list.map((item) =>{
         return(
-          <tr>
+          <tr key={item.item}>
               <td>{item}</td>
           </tr>
          )
