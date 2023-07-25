@@ -7,17 +7,21 @@ function Todo() {
     const [list, setList] = useState([]);
 
     const [newList, setNewList] = useState('');
-
+    
+    const showList = async () => {
+        const data = await getList();
+        setList(data);
+    }
+    
     useEffect(() => {
-        const showList = async () => {
-            const data = await getList();
-            setList(data);
-        }
         showList();
     }, []);
+
+
     const handleChange = async (event) => {
         setNewList(event.target.value);
     }
+
     const handleSubmit = async () => {
         await create ({
             fullName : newList

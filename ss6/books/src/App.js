@@ -14,9 +14,6 @@ function App() {
         <Route path="/create" Component={CreateBook}></Route>
       </Routes>
     </BrowserRouter>
-    // <div>
-    //   <CreateBook />
-    // </div>
   );
 }
 

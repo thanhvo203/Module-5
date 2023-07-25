@@ -1,40 +1,31 @@
 import { useEffect, useState } from "react";
-import { getList } from "../service/BookService";
+import { deleteBook, getList } from "../service/BookService";
 import { Link } from 'react-router-dom';
-import axios from "axios";
 
 
 function ListBook() {
     const [books, setBooks] = useState([]);
+    const [ flag , setFlag ] = useState(false)
 
-
-
-    useEffect(() => {
+    const list = () => {
         const showList = async () => {
             const data = await getList();
             setBooks(data);
         }
         showList();
-    }, [])
-
-    const handleDelete = (id) => {
-        axios.delete(`http://localhost:3030/books/${id}`)
-            .then(() => {
-                alert("Delete Success");
-
-                axios.get(`http://localhost:3030/books`)
-                    .then(response => {
-                        setBooks(response.data);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-
-            }).catch(error => {
-                console.log(error);
-            })
     }
 
+    useEffect(list, [flag])
+
+        const handleDelete = async (id) => {
+            const confirm = window.confirm("Do you wanna delete this");
+                if (confirm) {
+                    setFlag(!flag);
+                    await deleteBook(id).then(() => {
+                        alert("Delete Success");
+                    })
+                }
+        }
 
     return (
         <>
@@ -53,7 +44,7 @@ function ListBook() {
                         return (
                             <tr key={item.id}>
                                 <td>{item.title}</td>
-                                <td>{item.quanlity}</td>
+                                <td>{item.quantity}</td>
                                 <td>
                                     <Link to={`/update/${item.id}`}>
                                         <button>Update</button>

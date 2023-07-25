@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { createBook } from '../service/BookService';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -8,18 +9,13 @@ const CreateBook = () => {
 
    const [book, setBook] = useState({ title: '', quantity: '' });
 
-   const [submitted, setSubmitted] = useState(false);
 
-
-
-
+   const navigate = useNavigate();
    const handleSubmit = () => {
-      createBook(book)
-      setSubmitted(true)
+      createBook(book).then(() => {
+         navigate("/")
+      })
    };
-   if (submitted) {
-      <redirect to="/books" />;
-   }
 
    return (
       <div>
