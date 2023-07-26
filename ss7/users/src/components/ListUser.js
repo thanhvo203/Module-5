@@ -1,17 +1,22 @@
+
+import { useDispatch } from "react-redux";
 import { getUsers, deleteUser } from "../services/userService";
 import { useState, useEffect } from "react";
+import { listUsers } from "../store/action/userAction";
 
 function ListUser() {
+  const dispatch = useDispatch();
   const [users, setUsers] = useState([]);
   const [flag, setFlag] = useState(false);
-  const getListUser = async () => {
-    const data = await getUsers();
-    setUsers(data);
-  };
+
+   const showList = () => {
+    dispatch(listUsers(users));
+   }
 
   useEffect(() => {
-    getListUser();
-  }, [flag]);
+    getUsers().then(data => setUsers(data))
+  }, [users]);
+
 
   const handleDelete = async (id) => {
     const confirm = window.confirm("Do you wanna delete this");
@@ -19,6 +24,7 @@ function ListUser() {
             setFlag(!flag);
             await deleteUser(id).then(() => {
                 alert("Delete Success");
+
             })
         }
 }
