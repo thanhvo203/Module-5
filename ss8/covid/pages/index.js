@@ -1,7 +1,20 @@
 import "bootstrap/dist/css/bootstrap.css";
-import axios from "axios";
 
-export default function Home({ covids }) {
+import { getCovidList } from "./services/CovidService";
+import { useEffect, useState } from "react";
+export default function Home() {
+  
+  const [service, setService] = useState ([]);
+
+  const showList = () => {
+     const getList = async () => {
+        const data = await getCovidList();
+        setService(data);
+     }
+     getList();
+  }
+useEffect(showList)
+
   return (
     <div>
       <h1>VietNam's COVID-19 Information</h1>
@@ -17,7 +30,7 @@ export default function Home({ covids }) {
           </tr>
         </thead>
         <tbody>
-          {covids.map((covid) => (
+          {service.map((covid) => (
             <tr key={covid.id}>
               <td>{covid.id}</td>
               <td>{covid.confirmed}</td>
@@ -33,12 +46,3 @@ export default function Home({ covids }) {
   )
 };
 
-export async function getStaticProps() {
-  const res = await axios.get("http://localhost:8080/covids")
-  const covids = res.data
-  return {
-    props: {
-      covids: covids
-    }
-  };
-}
