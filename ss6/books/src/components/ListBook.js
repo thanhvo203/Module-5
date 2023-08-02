@@ -11,12 +11,11 @@ function ListBook() {
         const showList = async () => {
             const data = await getList();
             setBooks(data);
-        }
+        }   
         showList();
     }
 
     useEffect(list, [flag])
-
         const handleDelete = async (id) => {
             const confirm = window.confirm("Do you wanna delete this");
                 if (confirm) {

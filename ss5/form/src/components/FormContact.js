@@ -27,7 +27,7 @@ function FormContact(){
                         <ErrorMessage name='fullName' component= {'div'}></ErrorMessage>
                     </div>
                     <div>
-                        <label htmlFor='email'>Email</label>
+                        <lable htmlFor='email'>Email</lable>
                         <Field type='text' id='email' name='email'></Field>
                         <ErrorMessage name='email' component= {'div'}></ErrorMessage>
                     </div>
